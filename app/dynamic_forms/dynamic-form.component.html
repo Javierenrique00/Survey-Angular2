@@ -1,0 +1,23 @@
+<div>
+<h4>Encuesta: {{shortdescription}}</h4>
+<br>
+  <form (ngSubmit)="onSubmit()" [formGroup]="form">
+    <div *ngFor="let question of questions" class="form-row">
+      <df-question [question]="question" [form]="form"></df-question>
+      <br>
+    </div>
+    <div class="form-row">
+      <br>
+      <button type="submit" [disabled]="!form.valid" class="btn btn-default">
+        <span class="glyphicon glyphicon-save" aria-hidden="true"></span> Entrar</button>
+    
+        <span *ngIf="payLoad" class="form-row">
+          <h4><span class="label label-success"> <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Datos Enviados OK</span></h4><br>
+        </span>
+
+    </div>
+  </form>
+
+
+  
+</div>

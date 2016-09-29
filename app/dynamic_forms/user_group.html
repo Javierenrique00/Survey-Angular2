@@ -1,0 +1,69 @@
+<H4>Grupos de Audiencia</H4>
+<br>
+<button type="button" (click)="limpiaGrupo()" class="btn btn-default"> <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> Nuevo grupo</button>
+<br>
+<br>
+<form (ngSubmit)="onSubmit()" #usuariosForm="ngForm" >
+    <span *ngIf="nuevo_grupo">
+        <div>
+            <label for="nnn">Nombre del grupo</label>
+            <br>
+            <input type="text" class="form-control" id="nnn" pattern="^[0-9A-Za-z]+$" [disabled]="edit_group" required maxlength="20"
+            (keyup)="strVerifica()" [(ngModel)]="nuevogrupo"  name="nuevogrupo" style="width: 200px">
+        </div>
+        <div  [hidden]="!duplicados || edit_group" class="alert alert-danger">
+        Grupo existente. Por favor intente con otro identificador de grupo
+        </div>
+        <br>
+        <label>Usuarios</label>
+        <br>
+        <select multiple [(ngModel)]="salida" name="multiple" size=8>
+            <option *ngFor="let usuario of carga_dato; let i = index" value="{{i}}"
+            [(ngModel)]="usuario.id"  name="usr{{i}}" >{{usuario.nombre}} </option>
+        </select>
+
+        <button type="button" (click)="selectUsers()" class="btn btn-primary btn-xs">
+            <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span> Selecionar</button>
+        
+        
+        <select multiple size=8>
+            <option *ngFor="let usuario of selusers; let i = index" value="{{i}}"
+            [(ngModel)]="usuario.id" name="usrB{{i}}">{{usuario.nombre}}</option>
+        </select>
+        <br>
+        <br>
+        <!-- Lista para cargar los emails -->
+        <label for="listaemails">Emails</label>
+        <div>            
+            <textarea id="listaemails" [(ngModel)]="emails" name="emails" style="height:100px; width: 300px">
+            </textarea>
+            <button type="button" (click)="cargarEmails()" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-download" aria-hidden="true"></span> Cargar</button>
+        </div>
+        <div *ngFor="let email of vemails">
+            {{email}} 
+        </div>
+        <br>
+
+    <div>
+        <button type="submit" class="btn btn-default" [disabled]="!usuariosForm.form.valid || (duplicados && !edit_group)">
+            <span class="glyphicon glyphicon-save" aria-hidden="true"></span> Entrar</button>
+    </div>
+    <div>
+        <br>
+       <!--{{usuariosForm.value | json }} -->
+    </div>
+    </span>
+
+</form>
+<br>
+<hr>
+<!--   Lista los grupos que pertenecen al usuario -->
+<h4>Lista de grupos</h4>
+<span *ngFor="let grupo of grupos | async">
+<button type="button" (click)='editGroup(grupo.nombregruposingle)' class="btn btn-primary btn-xs">
+    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit</button> <button type="button" (click)='deleteGroup(grupo.nombregruposingle)' class="btn btn-primary btn-xs">
+    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete</button> &nbsp; {{grupo.nombregruposingle}}
+<br>
+<br>
+</span>
+

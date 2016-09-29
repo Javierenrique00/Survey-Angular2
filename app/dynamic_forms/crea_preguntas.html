@@ -1,0 +1,148 @@
+<br>
+<h4>Ingrese las preguntas a la encuesta</h4>
+
+    <form (ngSubmit)="onSubmit()" #preguntasForm="ngForm">
+        <table>
+
+        
+
+               <tr *ngFor="let objetos of arraypreguntas; let i = index">
+                   <div class="well well-sm">
+                    <td style="width: 300px">
+                        
+                            <label><h5><b>Pregunta {{i+1}}</b></h5></label>
+                            <br>            
+                            <input type="radio" name="obj{{i}}"
+                            value="textbox" [(ngModel)]="objetos.tipopregunta">Textbox<br/>
+                            <input type="radio" name="obj{{i}}"
+                            value="dropDownList" [(ngModel)]="objetos.tipopregunta">DropDownList<br/>
+
+                            <div>
+                                <label for="campo"><h5><b>Identificador del campo</b></h5></label>
+                                <input type="text" id="campo" pattern="^[0-9A-Za-z]+$" required 
+                                [(ngModel)]="objetos.campo" name="campo{{i}}" style="width: 120px">
+                            </div>
+
+
+                            <button type="button" (click)="borrarPregunta(i)" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Borrar pregunta {{i+1}}</button>
+                        
+                    </td>
+
+                    <td>
+                        
+                            
+                                <span [ngSwitch] = "objetos.tipopregunta">
+                                    <table>
+                                        <div *ngSwitchCase="'textbox'">  
+                                            <tr>                           
+                                
+                                                    <td>
+                                                        <label for="tipodata"><h5><b>Tipo pregunta</b></h5></label>
+                                                    </td>
+                                                    <td>
+                                                        <select id="tipodata" name="textboxtipo{{i}}" [(ngModel)]="objetos.textboxtipo">
+                                                            <option value="text">text</option>
+                                                            <option value="number">number</option>
+                                                            <option value="email">email</option>
+                                                            <option value="password">password</option>
+                                                            <option value="date">date</option>
+                                                            <option value="time">time</option>
+                                                            <option value="datetime">datetime</option>
+                                                            <option value="tel">tel</option>
+                                                        </select>
+                                                    </td>
+                                                
+                                            </tr>
+                                            <tr>
+                                            
+                                                <td>
+                                                    <label for="labeldata"><h5><b>Pregunta</b></h5></label>
+                                                </td>
+                                                <td>
+                                                    <input type="text" id="labeldata" required 
+                                                    [(ngModel)]="objetos.textboxpregunta" name="textboxpregunta{{i}}" >
+                                                </td>
+                                            
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <label for="valordata"><h5><b>Valor por defecto</b></h5></label>
+                                                </td>
+                                                <td>
+                                                    <input type="text" id="valordata"
+                                                    [(ngModel)]="objetos.textboxvalor" name="textboxvalor{{i}}">
+                                                </td>
+
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <label for="reqdata"><h5><b>Obligatoria</b></h5></label>
+                                                </td>
+                                                <td>
+                                                    <input type="checkbox" id="reqdata"
+                                                    [(ngModel)]="objetos.textboxobligatorio" name="textboxobligatorio{{i}}">
+                                                </td>
+                                            </tr>
+
+                                        </div> 
+
+                                        <div *ngSwitchCase="'dropDownList'">
+                                            <table>
+                                                <tr>
+                                                    <td>
+                                                        <label for="labeldata01"><h5><b>Pregunta</b></h5></label>
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" id="labeldata01" required
+                                                        [(ngModel)]="objetos.ddlistpregunta" name="ddlistpregunta{{i}}">
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <label for="opciondata"><h5><b>Opciones</b></h5></label>
+                                                    </td>
+                                                    <td>
+                                                        <textarea id="opciondata" required [(ngModel)]="objetos.ddlistopciones" name="ddlistopciones{{i}}">
+                                                    </textarea>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </table>
+                                </span>
+                            
+                        
+  
+                    </td>
+
+                   </div>
+                </tr>
+    
+            <tr>
+                <td>
+                    <br>
+                    <button type="button" class="btn btn-default" (click)="nuevaPregunta()"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Agregar pregunta</button>
+                    
+                    &nbsp; <button type="submit" class="btn btn-default"
+                            [disabled]="!preguntasForm.form.valid"><span class="glyphicon glyphicon-check" aria-hidden="true"></span> Check pregunta</button>
+                
+                </td>
+                <td>
+
+                    <p></p>
+
+                </td>
+                <td>
+
+                    <p></p>
+
+                </td>
+            </tr>
+
+        </table>
+        <!--
+            <button type="submit" class="btn btn-default"
+            [disabled]="!preguntasForm.form.valid"><span class="glyphicon glyphicon-check" aria-hidden="true"></span> Check</button>
+
+            {{preguntasForm.value | json }} -->
+    </form>

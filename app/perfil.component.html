@@ -1,0 +1,51 @@
+ <h4>Perfil</h4>
+
+ <button type="button" (click)="clickchangepassword()" >Cambiar contraseña</button>
+
+ <div *ngIf="changepassword">
+    
+    <label>Contraseña actual:</label><br>
+    <input type="password" [(ngModel)]="antpwd" name="antpwd"><br>
+    <label>Contraseña nueva:</label><br>
+    <input type="password" [(ngModel)]="newpwd1" name="newpwd1"><br>
+    <label>Repita contraseña nueva:</label><br>
+    <input type="password" [(ngModel)]="newpwd2" name="newpwd2"><br>
+    <button type="button" (click)="cambioPassword()">Cambiar contraseña</button>
+    <label *ngIf="msgoldpwdnotequal">La contraseña actual no corresponde. Verificar.</label>
+    <label *ngIf="msgnewpwdnotequal">Repita contraseña nueva. Revise que la contraseña nueva sea correcta.</label>
+     <label *ngIf="msgpasswordchange">Cambio de contraseña exitoso.</label>
+ </div>
+
+ <br>
+ <br>
+ <label>Email:</label>
+ <br>
+ <input type="email" [disabled]="disableemail" [(ngModel)]="userdata.email" name="email">
+ &nbsp; <button *ngIf="!checkcode" type="button" (click)="editaEmail()" >Edit</button>
+        <button *ngIf="checkcode && !disablecheckcode" type="button" (click)="checkCode()" >Entrar</button>
+        <button *ngIf="disablecheckcode" type="button" (click)="verificaCode()" >Código</button>
+        <input *ngIf="disablecheckcode" type="tel" [(ngModel)]="codigoin" name="codigoin">
+        <label *ngIf="msgverificaemail">El código no corresponde. Verifique que el código del email corresponda.</label>
+ <hr>
+ <h4>Datos personales</h4>
+ <br>
+ <form (ngSubmit)="onSubmit()" #dataform="ngForm">
+    <label> Nombre:</label>
+    <br>
+    <input type="text" [(ngModel)]="userdata.firstname" name="firstname">
+    <br>
+    <br>
+    <label> Apellido:</label>
+    <br>
+    <input type="text" [(ngModel)]="userdata.lastname" name="lastname">
+    <br>
+    <br>
+    <label> Fecha de nacimiento:</label>
+    <br>
+    <input type="date" [(ngModel)]="userdata.nacimiento" name="nacimiento">
+    <br>
+    <br>
+    <button type="submit" [disabled]="!dataform.form.valid || !disableemail" (click)="onSubmit()">Entrar</button>
+ </form>
+ <hr>
+

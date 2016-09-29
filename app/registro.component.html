@@ -1,0 +1,98 @@
+	<div class="row">
+		<div class="col-md-4">   
+		</div>
+		<div class="col-md-4">
+
+
+            <h4>Registro</h4>
+            <form (ngSubmit)="onSubmit()" #registroForm="ngForm">
+                    <div class="form-group">
+                        <label for="nombre">Usuario</label>
+                        <input type="text" class="form-control" id="nombre" required maxlength="30"
+                        [(ngModel)]="usuario.nombre" name="nombre" #pregunta="ngModel">
+                        <div  [hidden]="pregunta.valid || pregunta.pristine" 
+                            class="alert alert-danger">
+                        Usuario requerido
+                        </div>
+                        <div  [hidden]="!duplicados" 
+                            class="alert alert-danger">
+                        Usuario existente. Por favor intente con otro identificador de usuario
+                        </div>
+
+                        <div  [hidden]="strVerifica() || pregunta.pristine"
+                            class="alert alert-warning ">
+                        El usuario es solo soportado con numeros,letras y sin espacios.
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">email</label>
+                        <input type="email" class="form-control" id="email" required
+                        [(ngModel)]="usuario.email" name="email" #pregunta1="ngModel">
+                        <div  [hidden]="pregunta1.valid || pregunta1.pristine" 
+                            class="alert alert-danger">
+                        Email requerido
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pwd">Contraseña</label>
+                        <input type="password" class="form-control" id="pwd" required
+                        [(ngModel)]="usuario.pwd" name="pwd" #pregunta2="ngModel">
+                        <div  [hidden]="pregunta2.valid || pregunta2.pristine" 
+                                class="alert alert-danger">
+                            Contraseña requerida.
+                        </div>
+                        <div  [hidden]="pwdVerifica() || pregunta2.pristine" 
+                            class="alert alert-danger">
+                        Debe tener mayúsculas,minúsculas y números y ser de al menos 8 caracteres.
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="rpwd">Repita contraseña</label>
+                        <input type="password" class="form-control" id="rpwd" required
+                        [(ngModel)]="rpwd" name="rpwd" #pregunta3="ngModel">
+                        <div  [hidden]="(pregunta2.valid || pregunta2.pristine) && iguales" 
+                                class="alert alert-danger">
+                            Contraseña debe coincidir
+                        </div>
+                    </div>
+
+
+                    <button type="submit" class="btn btn-default"
+                    [disabled]="!registroForm.form.valid || duplicados || activacode">Entrar</button>
+
+                    <!--
+                    <ul>
+                    <li *ngFor="let item of searchTermStream | async"> {{ item }}  </li>
+
+                    <p> {{searchTermStream | async }}</p>
+                    </ul>  -->
+                    <!--
+                    <button type="button" (click)="test_email()" >Send test mail</button>
+                    -->
+
+                    <div *ngIf="activacode">
+                        <label for="code">Ingrese el codigo</label>
+                        <input type="tel" maxlength="4" size="4" id="code" [(ngModel)]="codigo" name="codigo">
+                        <button [disabled]="msgblock" type="button" (click)="verificaCodigo()"> Ingresar codigo</button> 
+                        <div  [hidden]="!msgerrorcode" 
+                                class="alert alert-danger">
+                            El código no coincide - El buzón de email no se ha verificado.
+                        </div>
+                        <div  [hidden]="!msgblock" 
+                                class="alert alert-danger">
+                            Número maximo de intentos alcanzado. Verifique el email.
+                        </div>
+
+                    </div>
+
+
+                </form>
+		</div>
+		<div class="col-md-4">
+		</div>
+	</div>

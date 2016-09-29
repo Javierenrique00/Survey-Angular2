@@ -1,0 +1,46 @@
+<div>
+    <h4>Resultados de las Encuestas</h4>
+    <br>
+    <span *ngFor="let encuesta of encuestas | async" >
+            <button type="button" (click)="trae_encuesta(encuesta.id,encuesta.nombre)" class="btn btn-primary btn-xs">
+                <span class="glyphicon glyphicon-signal" aria-hidden="true"></span> Resultados:
+            </button>&nbsp;{{encuesta.shortdescription}}&nbsp;
+            <br>
+            <br>
+    </span>
+    <br>
+    <hr>
+
+    
+    <div *ngIf="selencuesta!= null" >
+        <label> {{selencuesta.shortdescription}} </label>
+        <label> Respuestas:{{audiencia}}/{{vusuarios.length}} </label>
+        <br>
+        <br>
+        <label>Audiencia:</label> <button (click)="toggle_audiencia()" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span> Exportar a CSV</button>
+        <br>
+        <textarea *ngIf="togleaudiencia" [(ngModel)]="emails" name="emails" style="height:100px; width: 500px">
+        </textarea>
+        <br>
+        <label>Respuestas:</label> <button (click)="export_csv()" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span> Exportar a CSV</button>
+        <br>
+        <textarea *ngIf="exportdata" [(ngModel)]="datacsv" name="datacsv" style="height:100px; width: 500px"> </textarea>
+        <table class="table">
+            <tr>
+                <th  *ngFor="let column2 of tablehead" class="active">
+                    {{column2}}
+                </th>
+            </tr>
+            <tr *ngFor="let filas of tablecontent; let i = index">
+                <td *ngFor="let column of filas">
+                    {{column}}
+                </td>
+            </tr>
+
+        </table>
+
+
+    <div>
+        
+
+</div>

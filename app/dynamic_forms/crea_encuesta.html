@@ -1,0 +1,113 @@
+   <div>
+        <h4>Creacion de encuesta dinamica</h4>
+        
+        <div>
+          <button (click)="creaEncuesta()" class="btn btn-default"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> Crear nueva encuesta</button>
+        </div>
+        <br>
+        <br>
+        <div *ngIf = "nuevaEncuesta">
+            <form (ngSubmit)="onSubmit()" #registroForm="ngForm">
+              <div>
+                <label for="nombre">Nombre de la encuesta</label>
+                <input type="text" class="form-control" id="nombre" required pattern="^[0-9A-Za-z]+$" maxlength="20"
+                [(ngModel)]="newEncuesta.nombre" name="nombre" style="width: 200px" [disabled]="disable_edit">
+              </div>
+              <br>
+              <div>
+                  <label for="shortdesc">Descripción corta</label>
+                  <input type="text" id="shortdesc" class="form-control" [(ngModel)]="newEncuesta.shortdescription" name="shortdescription" maxlength="70" style="width: 400px">
+              </div>
+              <br>
+              <div>
+                    <table>
+
+                    <tr>
+                        <td>
+                            <label for="fechaini"><h5><b>Fecha de inicio de la encuesta</b></h5></label>
+                        </td>
+                        <td>
+                            <input type="date" class="form-control" id="fechaini" 
+                            [(ngModel)]="newEncuesta.fechaini" name="fechaini" #pregunta="ngModel">
+                        </td>
+                        <td>
+                            <input type="time" class="form-control" id="horaini" 
+                            [(ngModel)]="newEncuesta.horaini" name="horaini" #pregunta="ngModel">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="fechafin"><h5><b>Fecha de finalizacion de la encuesta</b></h5></label>
+                        </td>
+                        <td>
+                            <input type="date" class="form-control" id="fechafin" 
+                            [(ngModel)]="newEncuesta.fechafin" name="fechafin" #pregunta="ngModel">
+                        </td>
+                        <td>
+                            <input type="time" class="form-control" id="horafin" 
+                            [(ngModel)]="newEncuesta.horafin" name="horafin" #pregunta="ngModel">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="fechamensaje"><h5><b>Fecha de envio del mensaje de invitación</b></h5></label>
+                        </td>
+                        <td>
+                            <input type="date" class="form-control" id="fechamensaje" 
+                            [(ngModel)]="newEncuesta.fechamensaje" name="fechamensaje" #pregunta="ngModel">
+                        </td>
+                        <td>
+                            <input type="time" class="form-control" id="horamensaje" 
+                            [(ngModel)]="newEncuesta.horamensaje" name="horamensaje" #pregunta="ngModel">
+                        </td>
+                    </tr>
+
+
+                    </table>
+                <!-- Pone el control selector de audiencia -->
+                
+                <div>
+                    <sel-audiencia-render [audiencia]="newEncuesta.audiencia" [usuario]="usuario_actual"
+                     (copiaaudiencia)="copiaAudiencia($event)"></sel-audiencia-render>
+                </div>
+               
+                
+                <!--
+                <br>
+                audiencia - {{newEncuesta | json}} 
+                -->
+
+              </div>
+              <!--  Formato de preguntas de la encuesta enbebido-->
+                <creapreguntas (checkpreguntas)="checkPreguntas($event)"> Loading... </creapreguntas>
+
+              <button type="submit" class="btn btn-default"
+            [disabled]="!registroForm.form.valid || !okpreguntas"><span class="glyphicon glyphicon-save" aria-hidden="true"></span> Entrar</button>
+            </form>
+        </div>
+        <br>
+        <hr>
+        <!-- Listado de las encuestas del usuario
+          
+               <p *ngFor="let item of encuestas | async">
+                   <input type="button" value="Editar" name="{{item.id}}"
+                     (click)="editaEncuesta(item.id)">
+                   <input type="button" value="Eliminar" name="{{item.id}}"
+                     (click)="deleteEncuesta(item.id)"> {{item.nombre}}
+               </p>  -->
+           
+      
+           <h4>Lista de encuestas</h4>
+            <span *ngFor="let item of encuestas | async">
+            <button type="button" (click)="editaEncuesta(item.id)" class="btn btn-primary btn-xs">
+                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit</button>
+                <button type="button" (click)="deleteEncuesta(item.id,item.nombre)" class="btn btn-primary btn-xs">
+                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete</button>
+                <button type="button" (click)="enviarEncuesta(item.id,item.shortdescription)" class="btn btn-primary btn-xs">
+                <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Enviar ahora</button> &nbsp; {{item.nombre}}:{{item.shortdescription}}
+            <br>
+            <br>
+            </span>
+
+
+    </div>

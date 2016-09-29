@@ -1,0 +1,82 @@
+<!--
+    <h1>Encuestas dinámicas</h1>
+    <span *ngIf="esta_logueado">
+        <p>Usuario:{{user_logueado}}</p>
+        <a routerLink="/page1">Contestar Encuestas</a>
+        <a routerLink="/creaencuesta">Crea Encuesta</a>
+        <a routerLink="/usergroup">Grupos de audiencia</a>
+        <a routerLink="/logout">Logout</a>
+    </span>
+    <span *ngIf="!esta_logueado">
+        <a routerLink="/login">Login</a>
+        <a routerLink="/registro">Registro</a>
+        <a routerLink="/page2">Page2</a> 
+    </span>    
+    <router-outlet></router-outlet>  
+   -->
+
+  
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<h3>
+				Encuestas dinámicas
+			</h3>
+           <!-- Cuando esta logueado -->
+			<ul class="nav nav-tabs" *ngIf="esta_logueado">
+
+                    <li routerLinkActive="active">
+                        <a routerLink="/page1">Contestar Encuestas</a>
+                    </li>
+                    <li routerLinkActive="active">
+                        <a routerLink="/creaencuesta">Crea Encuesta</a>
+                    </li>
+                    <li routerLinkActive="active">
+                        <a routerLink="/usergroup">Grupos de audiencia</a>
+                    </li>
+                    <li routerLinkActive="active">
+                        <a routerLink="/resultados">Resultados de encuesta</a>
+                    </li>
+				<li class="dropdown pull-right">
+					 <a data-toggle="dropdown" class="dropdown-toggle"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> {{user_logueado}}<strong class="caret"></strong></a>
+					<ul class="dropdown-menu">
+						<li>
+							<a routerLink="/perfil">Perfil</a>
+						</li>
+						<li class="divider">
+						</li>
+						<li>
+							<a routerLink="/logout"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Logout</a>
+						</li>
+					</ul>
+				</li>
+			</ul>
+
+            <!-- Cuando no esta logueado -->
+			<ul class="nav nav-tabs" *ngIf="!esta_logueado">
+
+                    <li routerLinkActive="active">
+                        <a routerLink="/registro">Registro</a>
+                    </li>
+                    <li routerLinkActive="active">
+                        <a routerLink="/page2">Pagina2</a>
+                    </li>
+				<li class="dropdown pull-right">
+					 <a routerLink="/login" data-toggle="dropdown" class="dropdown-toggle">
+					 <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Login<strong class="caret"></strong></a>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-1">   
+		</div>
+		<div class="col-md-10">
+			<br>
+			<br>
+			<router-outlet></router-outlet>
+		</div>
+		<div class="col-md-1">
+		</div>
+	</div>
+</div>

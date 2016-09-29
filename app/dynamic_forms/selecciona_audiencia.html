@@ -1,0 +1,24 @@
+<!--   Lista los grupos que pertenecen al usuario -->
+<h5><b>Lista de grupos</b></h5>
+
+<form  #gruposForm="ngForm" >
+
+        <select multiple [(ngModel)]="salida" name="multiple" size=8>
+            <option *ngFor="let grupo of grupos; let i = index" value="{{i}}"
+            [(ngModel)]="grupo.id"  name="grp{{i}}"> {{grupo.nombregruposingle}} </option>
+        </select>
+
+            <button type="button" (click)="addGroup()" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span> Selecionar</button>
+
+        <select multiple [(ngModel)]="vsalida" name="multiesc" size=8>
+            <option *ngFor="let grupo of audiencia; let i = index" value="{{i}}"
+            > {{grupo}} </option>
+        </select>
+<!--
+        <br>
+        {{gruposForm.value | json }} - {{audiencia | json }}
+
+        <br>
+        {{audiencia | json }}
+        -->
+</form>

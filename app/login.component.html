@@ -1,0 +1,99 @@
+<!--- input Login Modal  -->
+<div class="container"> 
+  <!-- Trigger the modal with a button   class="modal fade" role="form"
+  <button type="button" class="btn btn-default btn-lg" id="myBtn" data-toggle="modal" data-target="#loginModal">Login</button> -->
+
+  <!-- Modal -->
+  <div id="loginModal" role="dialog" >
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 style="color:red;"><span class="glyphicon glyphicon-lock"></span> Login</h4>
+        </div>
+        <div class="modal-body">
+          <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+            <div class="form-group">
+              <label for="usrname"><span class="glyphicon glyphicon-user"></span> Usuario</label>
+              <input type="text" class="form-control" id="usrname" placeholder="Entre usuario" required [(ngModel)]="usuario.nombre" name="nombre" #pregunta="ngModel">
+            </div>
+            <div class="form-group">
+              <label for="psw"><span class="glyphicon glyphicon-eye-open"></span> Contraseña</label>
+              <input type="password" class="form-control" id="psw" placeholder="Entre contraseña" required [(ngModel)]="usuario.pwd" name="pwd" #pregunta1="ngModel">
+            </div>
+            <div class="checkbox">
+              <label><input type="checkbox" value="" checked>Remember me</label>
+            </div>
+            <button type="submit" class="btn btn-default btn-success btn-block" [disabled]="!loginForm.form.valid"><span class="glyphicon glyphicon-off"></span> Login</button>
+            <br>
+            <span *ngIf='(nopasa>0) && (usuario.state!="block") && !checking'>
+                            <h5><span class="alert alert-danger">No Coincide usuario y/o contraseña.</span></h5>
+                    </span>
+                    <h5><span *ngIf='usuario.state=="block"' 
+                    class="alert alert-danger">
+                            Usuario bloqueado
+                    </span></h5>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-default btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+          <p>No eres miembro ? <a routerLink="/registro">Registrate</a></p>
+          <p>Forgot <a href="#">Password?</a></p>
+        </div>
+      </div>
+    </div>
+  </div> 
+</div>
+
+<!--
+
+	<div class="row">
+		<div class="col-md-4">   
+		</div>
+		<div class="col-md-4">
+            <h4>Login</h4> 
+                <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+                
+                    <div class="form-group">
+                        <label for="nombre">Nombre</label>
+                        <input type="text" class="form-control" id="nombre" required
+                        [(ngModel)]="usuario.nombre" name="nombre" #pregunta="ngModel">
+                        <div  [hidden]="pregunta.valid || pregunta.pristine" 
+                            class="alert alert-danger">
+                        Usuario requerido
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <label for="pwd">Contraseña</label>
+                        <input type="password" class="form-control" id="pwd" required
+                        [(ngModel)]="usuario.pwd" name="pwd" #pregunta1="ngModel">
+                    <div  [hidden]="pregunta1.valid || pregunta1.pristine" 
+                                class="alert alert-danger">
+                            Contraseña requerida
+                    </div>
+
+                    </div>
+                    <button type="submit" class="btn btn-default"
+                    [disabled]="!loginForm.form.valid">Entrar</button>
+
+                    <span *ngIf='(nopasa>0) && (usuario.state!="block") && !checking' 
+                    class="alert alert-danger">
+                            No Coincide usuario y/o contraseña. Intento {{nopasa}}/4
+                    </span>
+                    <span *ngIf='usuario.state=="block"' 
+                    class="alert alert-danger">
+                            Usuario bloqueado
+                    </span>
+
+                </form>
+
+		</div>
+		<div class="col-md-4">
+		</div>
+	</div>
+
+    -->
+
