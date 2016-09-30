@@ -34,9 +34,11 @@ To be made:
 INSTALL INSTRUCTIONS
 
 1- Install RethinkDB. -> https://www.rethinkdb.com/docs/install/
+
    Short instructions: Download binary Rethinkdb file in any directory and run.
 
 2- Install Horizon. -> http://horizon.io/install/
+
    Short instructions:
    
         A- Install Horizon: run ->  npm install -g horizon
